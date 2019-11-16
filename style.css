@@ -1,0 +1,10 @@
+* {
+      outline: 1px solid maroon;
+    } 
+    body {
+      height: 100vh;
+    }
+
+    .row div {
+      min-height: 100px;
+    }
