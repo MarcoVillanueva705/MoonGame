@@ -39,13 +39,32 @@
 
     <footer>
       <div class="row">
-        <div class="col-lg-6">
-          <button type="button" class="btn btn-primary btn-lg btn-block">Click Me!</button>
+        <div class="col-lg-3">
+          <button type="button" class="btn btn-primary btn-lg btn-block" onclick="buyPickaxe()">Click Me!</button>
         </div>
-        <div class="col-lg-6">
-          <button type="button" class="btn btn-primary btn-lg btn-block">Click Me!</button>
+        <div class="col-lg-3">
+          <button type="button" class="btn btn-primary btn-lg btn-block" onclick="buyCart()">Click Me!</button>
+        </div>
+        <div class="col-lg-3">
+          <button type="button" class="btn btn-primary btn-lg btn-block" onclick="buyMiner()">Click Me!</button>
+        </div>
+        <div class="col-lg-3">
+          <button type="button" class="btn btn-primary btn-lg btn-block" onclick="buyRover()">Click Me!</button>
         </div>
       </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <h3>PickAxes:<span id="axecount"></span></h3>
+        </div>
+        <div class="col-lg-3">
+          <h3>Carts:<span id="cartcount"></span></h3>
+        </div>
+        <div class="col-lg-3">
+          <h3>Miners:<span id="minercount"></span></h3>
+        </div>
+        <div class="col-lg-3">
+          <h3>Rovers:<span id="rovercount"></span></h3>
+        </div>
     </footer>
     <script src="app.js"></script>
 </body>
