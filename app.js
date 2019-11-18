@@ -12,6 +12,8 @@ let minerDisplay = document.querySelector('#minercount')
 
 let roverDisplay = document.querySelector('#rovercount')
 
+let elem;
+
 let clickUpgrades = {
   pickaxes: {
     price: 100,
@@ -80,7 +82,10 @@ function buyMiner() {
 // }
 
 function collectAutoUpgrades() {
-  for (const automaticUpgrades.rovers.quantity in automaticUpgrades) {
+  for (let elem in automaticUpgrades) {
+    automaticUpgrades.rovers.quantity * automaticUpgrades.rovers.multiplier;
+    console.log(elem);
   }
+}
 
-  updateCheese()
+updateCheese()
