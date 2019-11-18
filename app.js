@@ -6,13 +6,15 @@ let cheeseDisplay = document.querySelector('#cheesecount')
 
 let axeDisplay = document.querySelector('#axecount')
 
+
 let cartDisplay = document.querySelector('#cartcount')
 
 let minerDisplay = document.querySelector('#minercount')
 
 let roverDisplay = document.querySelector('#rovercount')
 
-let elem;
+let modDisplay = document.querySelector
+  ('#modcount')
 
 let clickUpgrades = {
   pickaxes: {
@@ -42,50 +44,68 @@ let automaticUpgrades = {
 
 function mine() {
   player.cheese++;
-  updateCheese();
+  draw();
 }
 
-function updateCheese() {
+
+function draw() {
   cheeseDisplay.textContent = player.cheese.toString();
+  axeDisplay.textContent = clickUpgrades.pickaxes.quantity.toString();
+  cartDisplay.textContent = clickUpgrades.carts.quantity.toString();
+  minerDisplay.textContent = clickUpgrades.miners.quantity.toString();
+  modDisplay.textContent = (clickUpgrades.pickaxes.quantity * clickUpgrades.pickaxes.multiplier).toString();
+  // FIXME add the amount of multiplier this adds this is the qty times the multiplier
 }
 
 function buyPickaxe() {
-  if (player.cheese > clickUpgrades.pickaxes.price) {
-    player.cheese - clickUpgrades.pickaxes.price;
+  if (player.cheese >= clickUpgrades.pickaxes.price) {
+    player.cheese -= clickUpgrades.pickaxes.price;
+    //FIXME this currently performs a math opertion but does not reduce the cheese value
     clickUpgrades.pickaxes.quantity++;
-    axeDisplay.textContent = clickUpgrades.pickaxes.quantity.toString();
+    player.cheese += clickUpgrades.pickaxes.quantity * clickUpgrades.pickaxes.multiplier;
+    clickUpgrades.pickaxes.price *= 3;
+    // //FIXME dont forget to increase the price of the pickaxe!
+    draw();
   }
 }
 
 function buyCart() {
-  if (player.cheese > clickUpgrades.carts.price) {
-    player.cheese - clickUpgrades.carts.price;
+  if (player.cheese >= clickUpgrades.carts.price) {
+    player.cheese -= clickUpgrades.carts.price;
     clickUpgrades.carts.quantity++;
-    cartDisplay.textContent = clickUpgrades.carts.quantity.toString();
+    draw();
   }
 }
 
 function buyMiner() {
-  if (player.cheese > clickUpgrades.miners.price) {
-    player.cheese - clickUpgrades.miners.price;
+  if (player.cheese >= clickUpgrades.miners.price) {
+    player.cheese -= clickUpgrades.miners.price;
     clickUpgrades.miners.quantity++;
-    minerDisplay.textContent = clickUpgrades.miners.quantity.toString();
+    draw();
   }
 }
 
-// function buyRover() {
-//   if (player.cheese > automaticUpgrades.rovers.price) {
-//     player.cheese - automaticUpgrades.rovers.price;
-//     automaticUpgrades.rovers.quantity++;
-//     roverDisplay.textContent = automaticUpgrades.rovers.quantity.toString();
-//   }
-// }
+function buyRover() {
+  if (player.cheese >= automaticUpgrades.rovers.price) {
+    player.cheese -= automaticUpgrades.rovers.price;
+    automaticUpgrades.rovers.quantity++;
+    roverDisplay.textContent = automaticUpgrades.rovers.quantity.toString();
+    startInterval();
+  }
+}
 
 function collectAutoUpgrades() {
-  for (let elem in automaticUpgrades) {
-    automaticUpgrades.rovers.quantity * automaticUpgrades.rovers.multiplier;
-    console.log(elem);
+  for (let item in automaticUpgrades) {
+    // FIXME use bracket notation to access the correct properties and add them to the resources
+    //[item] in a for in loop is the first reference point for rover and everything in it...if there were another property like shuttle, then in the next iteration it would hit shuttle, then the following iteration would be rover etc
+    player.cheese += automaticUpgrades[item].quantity * automaticUpgrades[item].multiplier;
+
+    draw();
   }
 }
 
-updateCheese()
+function startInterval() {
+  setInterval(collectAutoUpgrades, 3000);
+}
+
+draw()
