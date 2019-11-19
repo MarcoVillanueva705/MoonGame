@@ -13,8 +13,14 @@ let minerDisplay = document.querySelector('#minercount')
 
 let roverDisplay = document.querySelector('#rovercount')
 
-let modDisplay = document.querySelector
-  ('#modcount')
+let pickModDisplay = document.querySelector
+  ('#pickmodcount')
+
+let cartModDisplay = document.querySelector('#cartmodcount')
+
+let minerModDisplay = document.querySelector('#minermodcount')
+
+let roverModDisplay = document.querySelector('#rovermodcount')
 
 let clickUpgrades = {
   pickaxes: {
@@ -53,7 +59,9 @@ function draw() {
   axeDisplay.textContent = clickUpgrades.pickaxes.quantity.toString();
   cartDisplay.textContent = clickUpgrades.carts.quantity.toString();
   minerDisplay.textContent = clickUpgrades.miners.quantity.toString();
-  modDisplay.textContent = (clickUpgrades.pickaxes.quantity * clickUpgrades.pickaxes.multiplier).toString();
+  pickModDisplay.textContent = (clickUpgrades.pickaxes.quantity * clickUpgrades.pickaxes.multiplier).toString();
+  cartModDisplay.textContent = (clickUpgrades.carts.quantity * clickUpgrades.carts.multiplier).toString();
+  minerModDisplay.textContent = (clickUpgrades.miners.quantity * clickUpgrades.miners.multiplier).toString();
   // FIXME add the amount of multiplier this adds this is the qty times the multiplier
 }
 
@@ -73,6 +81,7 @@ function buyCart() {
   if (player.cheese >= clickUpgrades.carts.price) {
     player.cheese -= clickUpgrades.carts.price;
     clickUpgrades.carts.quantity++;
+    clickUpgrades.carts.price *= 3;
     draw();
   }
 }
@@ -81,6 +90,7 @@ function buyMiner() {
   if (player.cheese >= clickUpgrades.miners.price) {
     player.cheese -= clickUpgrades.miners.price;
     clickUpgrades.miners.quantity++;
+    clickUpgrades.miners.price *= 3;
     draw();
   }
 }
@@ -89,7 +99,9 @@ function buyRover() {
   if (player.cheese >= automaticUpgrades.rovers.price) {
     player.cheese -= automaticUpgrades.rovers.price;
     automaticUpgrades.rovers.quantity++;
+    automaticUpgrades.rovers.price *= 2;
     roverDisplay.textContent = automaticUpgrades.rovers.quantity.toString();
+    roverModDisplay.textContent = (automaticUpgrades.rovers.quantity * automaticUpgrades.rovers.multiplier).toString();
     startInterval();
   }
 }
