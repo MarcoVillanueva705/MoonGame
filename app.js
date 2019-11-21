@@ -62,6 +62,7 @@ function draw() {
   pickModDisplay.textContent = (clickUpgrades.pickaxes.quantity * clickUpgrades.pickaxes.multiplier).toString();
   cartModDisplay.textContent = (clickUpgrades.carts.quantity * clickUpgrades.carts.multiplier).toString();
   minerModDisplay.textContent = (clickUpgrades.miners.quantity * clickUpgrades.miners.multiplier).toString();
+  player.cheese += clickUpgrades.pickaxes.quantity * clickUpgrades.pickaxes.multiplier;
   // FIXME add the amount of multiplier this adds this is the qty times the multiplier
 }
 
@@ -70,7 +71,6 @@ function buyPickaxe() {
     player.cheese -= clickUpgrades.pickaxes.price;
     //FIXME this currently performs a math opertion but does not reduce the cheese value
     clickUpgrades.pickaxes.quantity++;
-    player.cheese += clickUpgrades.pickaxes.quantity * clickUpgrades.pickaxes.multiplier;
     clickUpgrades.pickaxes.price *= 3;
     // //FIXME dont forget to increase the price of the pickaxe!
     draw();
